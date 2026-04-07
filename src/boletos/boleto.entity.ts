@@ -1,22 +1,22 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity('CONTAS_PAGAR')
-export class ContaPagar {
+@Entity('BOLETOS')
+export class Boleto {
     @PrimaryGeneratedColumn()
-    ID_CONTA_PAGAR!: number;
+    ID_BOLETO!: number;
 
     @Column()
-    ID_FORNECEDOR!: number;
+    ID_CONTA_RECEBER!: number;
 
-    @Column()
-    DESCRICAO!: string;
-
-    @Column('decimal', { precision: 10, scale: 2 })
-    VALOR!: number;
+    @Column({ length: 50 })
+    CODIGO_BARRAS!: string;
 
     @Column()
     DATA_VENCIMENTO!: Date;
 
-    @Column()
+    @Column('decimal', { precision: 10, scale: 2 })
+    VALOR!: number;
+
+    @Column({ length: 20 })
     STATUS!: string;
 }
