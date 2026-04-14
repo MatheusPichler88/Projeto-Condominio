@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Param, Body, NotFoundException } from '@nestjs/common'; 
 import { MoradoresService } from './moradores.service';
 import { Morador } from './morador.entity';
 
@@ -14,5 +14,15 @@ export class MoradoresController {
   @Post()
   create(@Body() morador: Morador): Promise<Morador> {
     return this.moradoresService.create(morador);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() morador: Morador): Promise<Morador | null> {
+    return this.moradoresService.update(id, morador);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number): Promise<void> {
+    return this.moradoresService.remove(id);
   }
 }

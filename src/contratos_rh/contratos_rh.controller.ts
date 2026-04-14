@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Param, Body, NotFoundException } from '@nestjs/common'; 
 import { ContratosRhService } from './contratos_rh.service';
 import { CONTRATO_RH } from './contrato_rh.entity';
 
@@ -14,5 +14,15 @@ export class ContratosRhController {
   @Post()
   create(@Body() contratoRh: CONTRATO_RH): Promise<CONTRATO_RH> {
     return this.contratosRhService.create(contratoRh);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() contratoRh: CONTRATO_RH): Promise<CONTRATO_RH | null> {
+    return this.contratosRhService.update(id, contratoRh);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number): Promise<void> {
+    return this.contratosRhService.remove(id);
   }
 }

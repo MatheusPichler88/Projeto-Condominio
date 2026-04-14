@@ -17,4 +17,13 @@ export class PagamentosService {
   create(pagamento: Pagamento): Promise<Pagamento> {
     return this.pagamentosRepo.save(pagamento);
   }
+
+  async update(id: number, dados: Partial<Pagamento>): Promise<Pagamento | null> {
+    await this.pagamentosRepo.update(id, dados);
+    return this.pagamentosRepo.findOneBy({ ID_PAGAMENTO: id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.pagamentosRepo.delete(id);
+  }
 }

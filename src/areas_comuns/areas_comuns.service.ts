@@ -17,4 +17,14 @@ export class AreasComunsService {
     create(areaComum: AreaComum): Promise<AreaComum> {
     return this.areasComunsRepo.save(areaComum);
     }
+
+    async update(id: number, dados: Partial<AreaComum>): Promise<AreaComum | null> {
+    await this.areasComunsRepo.update(id, dados);
+    return this.areasComunsRepo.findOneBy({ ID_AREA_COMUM: id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.areasComunsRepo.delete(id);
+  }
+    
 }

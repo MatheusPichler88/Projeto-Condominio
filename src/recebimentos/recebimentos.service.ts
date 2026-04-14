@@ -17,4 +17,13 @@ export class RecebimentosService {
   create(recebimento: Recebimento): Promise<Recebimento> {
     return this.recebimentosRepo.save(recebimento);
   }
+
+  async update(id: number, dados: Partial<Recebimento>): Promise<Recebimento | null> {
+    await this.recebimentosRepo.update(id, dados);
+    return this.recebimentosRepo.findOneBy({ ID_RECEBIMENTO: id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.recebimentosRepo.delete(id);
+  }
 }

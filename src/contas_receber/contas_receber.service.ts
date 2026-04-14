@@ -18,4 +18,12 @@ export class ContasReceberService {
         return this.contasReceberRepo.save(contaReceber);
     }
 
+    async update(id: number, dados: Partial<ContaReceber>): Promise<ContaReceber | null> {
+        await this.contasReceberRepo.update(id, dados);
+        return this.contasReceberRepo.findOneBy({ ID_CONTA_RECEBER: id });
+    }
+
+    async remove(id: number): Promise<void> {
+        await this.contasReceberRepo.delete(id);
+    }
 }

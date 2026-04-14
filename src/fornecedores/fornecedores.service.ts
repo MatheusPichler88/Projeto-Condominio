@@ -17,4 +17,13 @@ export class FornecedoresService {
   create(fornecedor: Fornecedor): Promise<Fornecedor> {
     return this.fornecedoresRepo.save(fornecedor);
   }
+
+  async update(id: number, dados: Partial<Fornecedor>): Promise<Fornecedor | null> {
+    await this.fornecedoresRepo.update(id, dados);
+    return this.fornecedoresRepo.findOneBy({ ID_FORNECEDOR: id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.fornecedoresRepo.delete(id);
+  }
 }

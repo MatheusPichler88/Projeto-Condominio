@@ -17,4 +17,13 @@ export class VisitasService {
   create(visita: Visita): Promise<Visita> {
     return this.visitasRepo.save(visita);
   }
+
+  async update(id: number, dados: Partial<Visita>): Promise<Visita | null> {
+    await this.visitasRepo.update(id, dados);
+    return this.visitasRepo.findOneBy({ ID_VISITA: id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.visitasRepo.delete(id);
+  }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Param, Body, NotFoundException } from '@nestjs/common'; 
 import { FuncionariosService } from './funcionarios.service';
 import { Funcionario } from './funcionario.entity';
 
@@ -14,5 +14,15 @@ export class FuncionariosController {
   @Post()
   create(@Body() funcionario: Funcionario): Promise<Funcionario> {
     return this.funcionariosService.create(funcionario);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() funcionario: Funcionario): Promise<Funcionario | null> {
+    return this.funcionariosService.update(id, funcionario);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number): Promise<void> {
+    return this.funcionariosService.remove(id);
   }
 }

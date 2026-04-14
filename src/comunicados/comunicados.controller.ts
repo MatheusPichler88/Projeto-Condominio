@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Param, Body, NotFoundException } from '@nestjs/common'; 
 import { ComunicadosService } from './comunicados.service';
 import { Comunicado } from './comunicado.entity';
 
@@ -14,5 +14,15 @@ export class ComunicadosController {
   @Post()
   create(@Body() comunicado: Comunicado): Promise<Comunicado> {
     return this.comunicadosService.create(comunicado);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() comunicado: Comunicado): Promise<Comunicado | null> {
+    return this.comunicadosService.update(id, comunicado);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number): Promise<void> {
+    return this.comunicadosService.remove(id);
   }
 }

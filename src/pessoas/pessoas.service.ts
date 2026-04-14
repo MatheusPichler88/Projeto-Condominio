@@ -17,4 +17,13 @@ export class PessoasService {
   create(pessoa: Pessoa): Promise<Pessoa> {
 	return this.pessoasRepo.save(pessoa);
   }
+
+  async update(id: number, dados: Partial<Pessoa>): Promise<Pessoa | null> {
+    await this.pessoasRepo.update(id, dados);
+    return this.pessoasRepo.findOneBy({ ID_PESSOA: id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.pessoasRepo.delete(id);
+  }
 }

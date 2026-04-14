@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Param, Body, NotFoundException } from '@nestjs/common'; 
 import { EnderecosService } from './enderecos.service';
 import { Endereco } from './endereco.entity';
 
@@ -14,5 +14,15 @@ export class EnderecosController {
   @Post()
   create(@Body() endereco: Endereco): Promise<Endereco> {
     return this.enderecosService.create(endereco);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() endereco: Endereco): Promise<Endereco | null> {
+    return this.enderecosService.update(id, endereco);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number): Promise<void> {
+    return this.enderecosService.remove(id);
   }
 }

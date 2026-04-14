@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Param, Body, NotFoundException } from '@nestjs/common';  
 import { RecebimentosService } from './recebimentos.service';
 import { Recebimento } from './recebimentos.entity';
+
 
 @Controller('recebimentos')
 export class RecebimentosController {
@@ -14,5 +15,15 @@ export class RecebimentosController {
   @Post()
   create(@Body() recebimento: Recebimento): Promise<Recebimento> {
     return this.recebimentosService.create(recebimento);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: number, @Body() recebimento: Recebimento): Promise<Recebimento | null> {
+    return this.recebimentosService.update(id, recebimento);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: number): Promise<void> {
+    return this.recebimentosService.remove(id);
   }
 }

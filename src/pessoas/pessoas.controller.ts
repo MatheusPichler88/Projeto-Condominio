@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Param, Body, NotFoundException } from '@nestjs/common'; 
 import { PessoasService } from './pessoas.service';
 import { Pessoa } from './pessoa.entity';
 
@@ -12,5 +12,15 @@ return this.pessoasService.findAll();
 @Post()
 create(@Body() pessoa: Pessoa): Promise<Pessoa> {
 return this.pessoasService.create(pessoa);
+}
+
+@Put(':id')
+update(@Param('id') id: number, @Body() dados: Partial<Pessoa>): Promise<Pessoa | null> {
+return this.pessoasService.update(id, dados);
+}
+
+@Delete(':id')
+remove(@Param('id') id: number): Promise<void> {
+return this.pessoasService.remove(id);
 }
 }

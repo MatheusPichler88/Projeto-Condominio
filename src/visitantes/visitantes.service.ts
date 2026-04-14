@@ -16,4 +16,13 @@ export class VisitantesService {
   create(visitante: Visitante): Promise<Visitante> {
     return this.visitantesRepo.save(visitante);
   }
+
+  async update(id: number, dados: Partial<Visitante>): Promise<Visitante | null> {
+    await this.visitantesRepo.update(id, dados);
+    return this.visitantesRepo.findOneBy({ ID_VISITANTE: id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.visitantesRepo.delete(id);
+  }
 }

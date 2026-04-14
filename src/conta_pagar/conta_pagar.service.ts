@@ -17,4 +17,13 @@ export class ContaPagarService {
   create(contaPagar: ContaPagar): Promise<ContaPagar> {
     return this.contaPagarRepo.save(contaPagar);
   }
+
+  async update(id: number, dados: Partial<ContaPagar>): Promise<ContaPagar | null> {
+    await this.contaPagarRepo.update(id, dados);
+    return this.contaPagarRepo.findOneBy({ ID_CONTA_PAGAR: id });
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.contaPagarRepo.delete(id);
+  }
 }
